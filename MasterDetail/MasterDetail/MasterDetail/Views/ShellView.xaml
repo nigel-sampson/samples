@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:views="clr-namespace:MasterDetail.Views;assembly=MasterDetail"
+             xmlns:cm="clr-namespace:Caliburn.Micro.Xamarin.Forms;assembly=Caliburn.Micro.Platform.Xamarin.Forms"
+             x:Class="MasterDetail.Views.ShellView"
+             IsPresented="{Binding MasterListAvailable}">
+  <MasterDetailPage.Master>
+    <ContentPage Title="Master">
+      <ListView ItemsSource="{Binding Characters}" SelectedItem="{Binding SelectedCharacter, Mode=TwoWay}">
+        <ListView.ItemTemplate>
+          <DataTemplate>
+            <ViewCell>
+              <ContentView cm:View.Model="{Binding}" cm:View.Context="MasterView" />
+            </ViewCell>
+          </DataTemplate>
+        </ListView.ItemTemplate>
+      </ListView>
+    </ContentPage>
+  </MasterDetailPage.Master>
+  <MasterDetailPage.Detail>
+    <ContentPage cm:View.Model="{Binding SelectedCharacter}" cm:View.Context="DetailView" Title="Master" />
+  </MasterDetailPage.Detail>
+</MasterDetailPage>
