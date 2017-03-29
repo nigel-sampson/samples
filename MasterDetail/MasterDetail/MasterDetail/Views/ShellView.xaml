@@ -7,7 +7,7 @@
              IsPresented="{Binding MasterListAvailable}">
   <MasterDetailPage.Master>
     <ContentPage Title="Master">
-      <ListView ItemsSource="{Binding Characters}" SelectedItem="{Binding SelectedCharacter, Mode=TwoWay}">
+      <ListView ItemsSource="{Binding Items}" SelectedItem="{Binding ActiveItem, Mode=TwoWay}">
         <ListView.ItemTemplate>
           <DataTemplate>
             <ViewCell>
@@ -19,6 +19,6 @@
     </ContentPage>
   </MasterDetailPage.Master>
   <MasterDetailPage.Detail>
-    <ContentPage cm:View.Model="{Binding SelectedCharacter}" cm:View.Context="DetailView" Title="Master" />
+    <ContentPage cm:View.Model="{Binding ActiveItem}" cm:View.Context="DetailView" Title="Master" />
   </MasterDetailPage.Detail>
 </MasterDetailPage>

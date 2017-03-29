@@ -3,16 +3,15 @@ using Caliburn.Micro;
 
 namespace MasterDetail.ViewModels
 {
-    public class ShellViewModel : Screen
+    public class ShellViewModel : Conductor<CharacterViewModel>.Collection.OneActive
     {
-        private CharacterViewModel selectedCharacter;
         private bool masterListAvailable;
 
         public ShellViewModel()
         {
             MasterListAvailable = true;
 
-            Characters = new BindableCollection<CharacterViewModel>
+            Items.AddRange(new []
             {
                 new CharacterViewModel("Shadow Moon", "The Ex-Con", "character1.jpg"),
                 new CharacterViewModel("Mr Wednesday", "The Con Man", "character2.jpg"),
@@ -24,21 +23,12 @@ namespace MasterDetail.ViewModels
                 new CharacterViewModel("Mad Sweeny", "The Leprechaun", "character8.jpg"),
                 new CharacterViewModel("Technical Boy", "The God of Technology", "character9.jpg"),
                 new CharacterViewModel("Easter", "The Godess of Spring", "character10.jpg"),
-            };
+            });
         }
 
-        public BindableCollection<CharacterViewModel> Characters { get; }
-
-        public CharacterViewModel SelectedCharacter
+        protected override void OnActivationProcessed(CharacterViewModel item, bool success)
         {
-            get { return selectedCharacter; }
-            set
-            {
-                selectedCharacter = value;
-                NotifyOfPropertyChange();
-
-                MasterListAvailable = SelectedCharacter == null;
-            }
+            MasterListAvailable = item == null;
         }
 
         public bool MasterListAvailable
